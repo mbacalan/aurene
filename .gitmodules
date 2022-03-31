@@ -1,0 +1,6 @@
+[submodule "aurene-bot"]
+	path = aurene-bot
+	url = git@github.com:mbacalan/aurene-bot.git
+[submodule "aurene-dashboard"]
+	path = aurene-dashboard
+	url = git@github.com:mbacalan/aurene-dashboard.git

@@ -1,0 +1,44 @@
+---
+version: '3.9'
+
+services:
+  redis:
+    image: "redis"
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./docker/redis:/data
+    restart: unless-stopped
+
+  mongo:
+    image: "mongo"
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./docker/db/:/data
+    restart: unless-stopped
+
+  bot:
+    build:
+      context: ./aurene-bot
+    depends_on:
+      - redis
+      - mongo
+    env_file:
+      - ./aurene-bot/.env
+    volumes:
+      - ./docker/bot/:/data
+    restart: unless-stopped
+
+  dashboard:
+    build:
+      context: ./aurene-dashboard
+    depends_on:
+      - redis
+      - mongo
+    env_file:
+      - ./aurene-bot/.env
+    command: npm run start
+    volumes:
+      - ./docker/dashboard/:/data
+    restart: unless-stopped
