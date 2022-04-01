@@ -1,0 +1,10 @@
+services:
+  bot:
+    depends_on:
+      - redis
+    command: npm run start
+
+  dashboard:
+    depends_on:
+      - redis
+    command: npm run start

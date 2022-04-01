@@ -1,0 +1,20 @@
+services:
+  mongo:
+    image: "mongo"
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./docker/db/:/data
+    restart: unless-stopped
+
+  bot:
+    depends_on:
+      - redis
+      - mongo
+    command: npm run dev
+
+  dashboard:
+    depends_on:
+      - redis
+      - mongo
+    command: npm run dev
