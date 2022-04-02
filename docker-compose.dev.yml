@@ -1,20 +1,16 @@
 services:
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./docker/redis:/data
+    restart: unless-stopped
+
   mongo:
     image: "mongo"
     ports:
       - "27017:27017"
     volumes:
-      - ./docker/db/:/data
+      - ./docker/mongo/:/data
     restart: unless-stopped
-
-  bot:
-    depends_on:
-      - redis
-      - mongo
-    command: npm run dev
-
-  dashboard:
-    depends_on:
-      - redis
-      - mongo
-    command: npm run dev

@@ -14,8 +14,7 @@ services:
       - redis
     env_file:
       - ./aurene-bot/.env
-    volumes:
-      - ./docker/bot/:/data
+    command: npm run start
     restart: unless-stopped
 
   dashboard:
@@ -27,6 +26,5 @@ services:
       - ./aurene-dashboard/.env
     ports:
       - "3000:3000"
-    volumes:
-      - ./docker/dashboard/:/data
+    command: npm run start
     restart: unless-stopped
